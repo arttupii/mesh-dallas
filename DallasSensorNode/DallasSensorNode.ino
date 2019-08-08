@@ -50,14 +50,6 @@ void setup() {
     Serial.println("No connection to master!!! Reboot");
     deepSleepMode(); //Perhaps this works in the next time. Let's go to sleep
   }
-
-  //Handle MQTT events from master. Do not call publish inside of call back. --> Endless event loop and crash
-  simpleMqtt.handleEvents([](const char *topic, const char* value) {
-  });
-
-
-
-  Serial.println("Alarm has been published succesfully!!");
 }
 
 float getTemperature() {
