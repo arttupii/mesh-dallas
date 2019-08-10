@@ -19,12 +19,6 @@ OneWire oneWire(DS18B20_PIN);
 DallasTemperature sensors(&oneWire);
 SimpleMQTT simpleMqtt = SimpleMQTT(ttl, deviceName);
 
-void espNowFloodingMeshRecv(const uint8_t *data, int len, uint32_t replyPrt) {
-  if (len > 0) {
-    simpleMqtt.parse(data, len, replyPrt); //Parse simple Mqtt protocol messages
-  }
-}
-
 void deepSleepMode(){
   ESP.deepSleep(60*1000*1000); //Sleep 1min
 }
@@ -32,8 +26,6 @@ void deepSleepMode(){
 void setup() {
   Serial.begin(115200);
 
-  //Set device in AP mode to begin with
-  espNowFloodingMesh_RecvCB(espNowFloodingMeshRecv);
   espNowFloodingMesh_secredkey(secredKey);
   espNowFloodingMesh_setAesInitializationVector(iv);
   espNowFloodingMesh_setToMasterRole(false, ttl);
